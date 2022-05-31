@@ -1,12 +1,13 @@
 import Exceptions.EmptyQueueException;
 import TADs.MyLinkedListImpl;
 import TADs.MyQueueImpl;
+import TADs.Stack;
 
 import java.util.Queue;
 
 public class Principal {
     public static void main(String[] args) throws EmptyQueueException {
-        MyLinkedListImpl myObj = new MyLinkedListImpl();
+        /*MyLinkedListImpl myObj = new MyLinkedListImpl();
         myObj.add(0);
         myObj.add(1);
         myObj.add(2);
@@ -27,9 +28,21 @@ public class Principal {
             System.out.println(myObj.get(i));
         }
 
+*/
+        Stack pila = new Stack();
+        pila.push(0);
+        pila.push(1);
+        pila.push(3);
+        pila.push(4);
 
-
-
+        for (int i = 0 ; i < pila.size(); i++){
+            System.out.println(pila.get(i));
+        }
+        pila.pop();
+        System.out.println("Se elimina un elemento");
+        for (int i = 0 ; i < pila.size(); i++){
+            System.out.println(pila.get(i));
+        }
 
 
     }
