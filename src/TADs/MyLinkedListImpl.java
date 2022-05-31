@@ -1,12 +1,12 @@
 package TADs;
 
-public class MyLinkedListImpl implements MyLinkedList{
-    private Nodo cabeza;
-    private Nodo cola;
+public class MyLinkedListImpl<T> implements MyLinkedList{
+    private Nodo<T> cabeza;
+    private Nodo<T> cola;
 
 
     @Override
-    public void add(Object value) {
+    public void add(T value) {
         if (cabeza != null) {
             Nodo nodoActual = cabeza;
             while (nodoActual.getSiguiente() != null) {
@@ -21,25 +21,42 @@ public class MyLinkedListImpl implements MyLinkedList{
 
     @Override
     public void remove(int position) {
+Nodo<T> nodoActual = this.cabeza;
+if(nodoActual == null){
+    //No hacer nada
+} else {
+    int posicionActual = -1;
+    while(posicionActual != position){
+        nodoActual = nodoActual.getSiguiente();
+        posicionActual = posicionActual + 1;
+    }
+    if (nodoActual != null){
+       Nodo<T> nodoAnterior = nodoActual;
+       nodoAnterior.setSiguiente(nodoActual.getSiguiente());
 
+
+    }
+}
     }
 
     @Override
-    public Object get(int position) {
+    public int get(int position) {
         int lugar = 0;
-        Nodo nodoActual = cabeza;
+        Nodo<T> nodoActual = cabeza;
         while (lugar < position) {
             nodoActual = nodoActual.getSiguiente();
             lugar = lugar + 1;
         }
-        int valor = (Integer) nodoActual.getValue();
+        int valor = (int) nodoActual.getValue();
 
         return valor;
 
     }
 
+
+
     @Override
-    public boolean estaEnLista(Object value) {
+    public boolean estaEnLista(T value) {
 
         boolean existe = false;
         Nodo nodoTemp = this.cabeza;

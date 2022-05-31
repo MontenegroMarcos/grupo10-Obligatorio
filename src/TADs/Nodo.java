@@ -1,26 +1,28 @@
 package TADs;
 
-public class Nodo {private Object value;
-    private Nodo siguiente;//Siguiente
+public class Nodo<T> {
 
-    public Nodo(Object value, Nodo siguiente) {
+    private T value;
+    private Nodo<T> siguiente;//Siguiente
+
+    public Nodo(T value, Nodo<T> siguiente) {
         this.value = value;
         this.siguiente = siguiente;
     }
 
-    public Nodo getSiguiente() {
+    public Nodo<T> getSiguiente() {
         return siguiente;
     }
 
-    public Object getValue() {
+    public T getValue() {
         return value;
     }
 
-    public void setValue(Object value) {
+    public void setValue(T value) {
         this.value = value;
     }
 
-    public void setSiguiente(Nodo siguiente) {
+    public void setSiguiente(Nodo<T> siguiente) {
         this.siguiente = siguiente;
     }
 }

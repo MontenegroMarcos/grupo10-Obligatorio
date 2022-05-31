@@ -1,11 +1,13 @@
-package TADs;
+package TADs<T>;
 
 public interface MyLinkedList {
-    public void add(Object value);
+
+
+    void add(T value);
 
     public void remove(int position);
 
-    public Object get(int position);
+    public int get(int position);
 
-    public boolean estaEnLista(Object value);
+    public boolean estaEnLista(T value);
 }
