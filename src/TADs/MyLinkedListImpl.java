@@ -21,32 +21,53 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
 
     @Override
     public void remove(int position) {
-        int posicion = 0;
+        int lugar = 0;
         Nodo nodoActual = this.cabeza;
         Nodo nodoAnterior = null;
 
-        while (nodoActual != null && posicion != position) {
+        if(position == 0){
+            this.cabeza = this.cabeza.getSiguiente();
+        } else {
+            while(nodoActual != null && lugar != position){
+                lugar++;
+                nodoAnterior = nodoActual;
+                nodoActual = nodoActual.getSiguiente();
+            }
+
+            if(nodoActual != null){
+                nodoAnterior.setSiguiente(nodoActual.getSiguiente());
+
+            }
+        }
+
+
+
+
+
+/*
+        while (nodoActual != null && lugar != position) {
+            lugar++;
             nodoAnterior = nodoActual;
             nodoActual = nodoActual.getSiguiente();
         }
 
         if (nodoActual != null) {
+
             if (position != 0) {
 
                 nodoAnterior.setSiguiente(nodoActual.getSiguiente());
-                nodoActual.setSiguiente(null);
+
 
             } else if (position == 0) {
 
                 this.cabeza = null;
-                this.cola = null;
 
             } else if (nodoAnterior.getSiguiente() == this.cola) {
 
                 nodoAnterior.setSiguiente(null);
                 this.cola = nodoAnterior;
             }
-        }
+        }*/
 
     }
 
@@ -60,7 +81,7 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
             lugar = lugar + 1;
         }
 
-        if(lugar == position){
+        if (lugar == position) {
             valorDevuelto = nodoActual.getValue();
         }
 
@@ -85,6 +106,19 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T> {
 
         return existe;
 
+    }
+
+    public int size() {
+        int count = 0;
+        Nodo<T> temp = this.cabeza;
+
+        while (temp != null) {
+            count ++;
+            temp = temp.getSiguiente();
+
+        }
+
+        return count;
     }
 }
 

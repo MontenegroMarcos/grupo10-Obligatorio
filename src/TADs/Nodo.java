@@ -10,6 +10,10 @@ public class Nodo<T> {
         this.siguiente = siguiente;
     }
 
+    public Nodo(T value) {
+        this.value = value;
+    }
+
     public Nodo<T> getSiguiente() {
         return siguiente;
     }
