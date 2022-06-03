@@ -25,7 +25,7 @@ public class MyHashTableIMPL<K, T> implements HashTable<K, T> {
             }
         }
 
-        cargaDelSistema = cantidaddeEntradas / (Integer)miTabla.length;
+        cargaDelSistema = cantidaddeEntradas / miTabla.length;
 
         if (cargaDelSistema >= 0.8) {
 
