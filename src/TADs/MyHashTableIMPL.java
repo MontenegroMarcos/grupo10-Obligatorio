@@ -154,6 +154,13 @@ public class MyHashTableIMPL<K, T> implements HashTable<K, T> {
 
     @Override
     public int size() {
-        return miTabla.length;
-    }
+        int cantidaddeEntradas = 0;
+
+        for (int i = 0; i < miTabla.length; i++) {
+            if (miTabla[i] != null) {
+                cantidaddeEntradas = cantidaddeEntradas + 1;
+            }
+        }
+
+        return cantidaddeEntradas;    }
 }
