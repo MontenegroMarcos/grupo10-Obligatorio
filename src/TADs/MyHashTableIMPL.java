@@ -38,7 +38,7 @@ public class MyHashTableIMPL<K, T> implements HashTable<K, T> {
         }
 
         int position = (key.hashCode()) % miTabla.length;
-//FIXME isEstaBorrado
+
         if (miTabla[position] == null || miTabla[position].isEstaBorrado() || miTabla[position].getLlave().equals(key)) {
 
             HashNode<K, T> nodoAgregar = new HashNode<>(key, value);
@@ -85,7 +85,7 @@ public class MyHashTableIMPL<K, T> implements HashTable<K, T> {
         int position = key.hashCode();
         T retorno = null;
 
-        if (miTabla[position] != null && miTabla[position].getLlave().equals(key) && !miTabla[position].isEstaBorrado()) {
+        if (miTabla[position] != null && miTabla[position].getLlave() != null && miTabla[position].getLlave().equals(key) && !miTabla[position].isEstaBorrado()) {
             retorno = miTabla[position].getValor();
 
         } else {
@@ -99,7 +99,7 @@ public class MyHashTableIMPL<K, T> implements HashTable<K, T> {
             } while (miTabla[nuevaposicion] != null && !miTabla[nuevaposicion].getLlave().equals(key)
                     && numerodeColision < miTabla.length);
 
-            if (numerodeColision < miTabla.length && miTabla[nuevaposicion].getLlave().equals(key) &&
+            if (numerodeColision < miTabla.length && miTabla[position].getLlave() != null && miTabla[nuevaposicion].getLlave().equals(key) &&
                     !this.miTabla[nuevaposicion].isEstaBorrado()) {
                 retorno = miTabla[nuevaposicion].getValor();
             }
@@ -162,5 +162,6 @@ public class MyHashTableIMPL<K, T> implements HashTable<K, T> {
             }
         }
 
-        return cantidaddeEntradas;    }
+        return cantidaddeEntradas;
+    }
 }
