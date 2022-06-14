@@ -23,6 +23,10 @@ public class TestHashMethods {
         miTablaHash3.put(5,"Carlo");
         miTablaHash3.put(6,"Rober");
         miTablaHash3.remove(5);
+
+
+
+
       //assertNull("El metodo remover no funca", miTablaHash3);
     }
 

@@ -46,7 +46,7 @@ public class Principal {
             System.out.println(pila.get(i));
         }
 
-*/
+
 
 
 
@@ -87,6 +87,6 @@ public class Principal {
         arbol.insert(12, "Tercer Izquierdo Izquierdo");
         System.out.println(arbol.find(12));
 
+    }*/
     }
 }
-
