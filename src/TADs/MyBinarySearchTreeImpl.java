@@ -75,7 +75,7 @@ public class MyBinarySearchTreeImpl<K extends Comparable<K>, T> implements MyBin
         NodeBST<K, T> auxiliar = findNode(key, actualNode);
 
         if (auxiliar == null) {
-            System.out.println("No existe");
+            //System.out.println("No existe");
         }
 
         if (auxiliar == null) {
