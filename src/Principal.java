@@ -9,84 +9,55 @@ import java.util.Queue;
 
 public class Principal {
     public static void main(String[] args) throws EmptyQueueException, ElementNotExistException {
-        /*MyLinkedListImpl myObj = new MyLinkedListImpl();
-        myObj.add(0);
-        myObj.add(1);
-        myObj.add(2);
-        myObj.add(3);
-        myObj.add(4);
-        myObj.add(5);
-        myObj.add(6);
-        myObj.add(7);
 
-        for (int i = 0; i < myObj.size(); i++) {
-            System.out.println(myObj.get(i));
+        //Se hace la carga del sistema
+
+        //Consulta que se desea
+        int consulta = 0;
+
+        if (consulta == 1) {
+            //Primer Consulta
+            /*Listar las 10 casas de cerveza (breweries) con más reseñas en un año (este año va
+            a ser ingresado como parámetro por consola). Este listado deberá incluir el id de la
+            casa, el nombre, y la cantidad de reseñas para cada uno, y debe estar ordenado por
+            cantidad de reseñas en orden descendente. Se espera que esta operación sea de
+            orden n en notación Big O*/
+
         }
 
-        System.out.println(myObj.estaEnLista(7));
-        myObj.remove(2); // en la posicion 2 estaba 4
+        if (consulta == 2) {
+            //Segunda Consulta
+            /*Top 15 catadores con más reseñas. Este listado deberá incluir el nombre de usuario,
+            y la cantidad de reseñas de cada uno, ordenado por cantidad de reseñas en orden
+            descendente. Se espera que esta operación sea de orden n en notación Big O*/
 
-        for (int i = 0; i < myObj.size(); i++) {
-            System.out.println(myObj.get(i));
         }
 
-*/
-      /*  Stack pila = new Stack();
-        pila.push(0);
-        pila.push(1);
-        pila.push(3);
-        pila.push(4);
+        if (consulta == 3) {
+            // Tercer Consulta
+            /*Cantidad de reviews en un rango dado. Esta cantidad tomará como entrada la fecha
+            de inicio y la fecha de finalización. Se deben incluir ambas fechas para la cantidad a
+            retornar.*/
 
-        for (int i = 0 ; i < pila.size(); i++){
-            System.out.println(pila.get(i));
-        }
-        pila.pop();
-        System.out.println("Se elimina un elemento");
-        for (int i = 0 ; i < pila.size(); i++){
-            System.out.println(pila.get(i));
+
         }
 
+        if (consulta == 4) {
+            //Cuarta Consulta
+            /*Top 7 estilos de cervezas con mejor aroma. Para esto se deberá tomar en cuenta el
+            promedio de puntuación de aroma para cada estilo. Se deberá retornar el listado en
+            orden descendente por puntuación.*/
 
-
-
-
-
-
-        MyBinarySearchTreeImpl arbol = new MyBinarySearchTreeImpl();
-
-
-        arbol.insert(8,"Primero");
-        System.out.println(arbol.find(8));
-
-        arbol.insert(12,"Segundo Derecho");
-        System.out.println(arbol.find(12));
-
-        arbol.insert(6,"Segundo Izquierdo");
-        System.out.println(arbol.find(6));
-
-        arbol.insert(2,"Tercer Izquierdo Izquierdo");
-        System.out.println(arbol.find(2));
-
-        arbol.insert(7,"Tercer Izquierdo Derecho");
-        System.out.println(arbol.find(7));
-
-        arbol.insert(10,"Tercer Derecho Izquierdo");
-        System.out.println(arbol.find(10));
-
-        arbol.insert(14,"Tercer Derecho Derecho");
-        System.out.println(arbol.find(14));
-
-
-        arbol.delete(12);
-        try {
-            System.out.println(arbol.find(12));
-        } catch (ElementNotExistException e) {
-            System.out.println("Se borro el 12");
         }
 
-        arbol.insert(12, "Tercer Izquierdo Izquierdo");
-        System.out.println(arbol.find(12));
+        if (consulta == 5) {
+            //Quinta Consulta
+            /*Top 5 cervezas con más reviews. Para este listado se deberá retornar el nombre de
+            la cerveza, junto con la cantidad de reviews hechas a esta, y su puntaje general
+            promedio. Se debe ordenar este listado por reviews en orden descendente*/
 
-    }*/
+
+        }
+
     }
 }
