@@ -5,12 +5,52 @@ import TADs.MyLinkedListImpl;
 import TADs.MyQueueImpl;
 import TADs.Stack;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Queue;
 
 public class Principal {
     public static void main(String[] args) throws EmptyQueueException, ElementNotExistException {
 
         //Se hace la carga del sistema
+
+
+
+
+        String linea;
+        Long brewery_id;
+        String brewery_name;
+
+
+        try {
+            BufferedReader lecter = new BufferedReader(new FileReader("src/archivos/beer_dataset_test.csv"));
+            linea = lecter.readLine();
+
+            while((linea = lecter.readLine() )!= null ){
+
+
+                String[] entradas = linea.split(",");
+
+                //if(i==150000) {
+                //System.out.println(entradas);
+                //}
+                brewery_id =  Long.parseLong(entradas[0]);
+                brewery_name = entradas[2];
+                if(!brewery_name.startsWith("\"") /*&& !brewery_name.startsWith("\"")*/){
+
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("No se encontro el archivo");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Funciona?");
+
 
         //Consulta que se desea
         int consulta = 0;
