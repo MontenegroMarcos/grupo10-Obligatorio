@@ -21,9 +21,10 @@ public class SistemaCentral {
 
         NodoBrewery[] entrada = entradas;
 
-
+        NodoBrewery[] resultados;
 
         for (int i = 0; i < 9; i++) {
+
 
         }
 
@@ -36,7 +37,12 @@ public class SistemaCentral {
 
 
 
-         NodoBrewery[] resultados;
+
+
+
+
+
+
 
         //Estructura de Control para que solo cuente los nodos con el anio correcto
 
