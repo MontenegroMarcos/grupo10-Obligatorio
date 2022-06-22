@@ -46,8 +46,9 @@ public class Principal {
             NodoBrewery dato8 = new NodoBrewery(2312L,"Cerveceria LEbere", 18);
             NodoBrewery dato9 = new NodoBrewery(2321L,"Cerveceria Nova", 34);
             NodoBrewery dato10 = new NodoBrewery(24334L,"Cerveceria Popular", 77);
+            NodoBrewery dato11 = new NodoBrewery(24334L,"Cerveceria Dios Funciona", 144);
 
-            NodoBrewery[] carga_de_datos = {dato1,dato2,dato3,dato4,dato5,dato6,dato7,dato8,dato9,dato10};
+            NodoBrewery[] carga_de_datos = {dato1,dato2,dato3,dato4,dato5,dato6,dato7,dato8,dato9,dato10,dato11};
 
 
 
@@ -57,7 +58,7 @@ public class Principal {
             top10Casas = instancia.PrimerConsulta( carga_de_datos , anio);
 
             for (int i = 0; i < top10Casas.length; i++) {
-                System.out.println(top10Casas[i].getName() + "  " + top10Casas[i].getCantidad_de_resenias());
+                System.out.println( top10Casas[i].getId() +  " " + top10Casas[i].getName() + "  " + top10Casas[i].getCantidad_de_resenias());
             }
 
 
