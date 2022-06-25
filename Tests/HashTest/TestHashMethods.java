@@ -22,7 +22,7 @@ public class TestHashMethods {
     public void testRemove() {
         miTablaHash3.put(5, "Carlo");
         miTablaHash3.put(6, "Rober");
-        miTablaHash3.remove(5);
+
 
         try {
             System.out.println(miTablaHash3.get(5));
