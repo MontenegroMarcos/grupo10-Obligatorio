@@ -1,167 +1,136 @@
 package TADs;
 
-public class MyHashTableIMPL<K, T> implements HashTable<K, T> {
+import Exceptions.KeyNotExist;
 
 
-    private HashNode<K, T>[] miTabla;
 
-    public static final int TAMANIO_INIT = 10;
-    public static final int FACTOR_CRECIMIENTO = 2;
+import static java.lang.Math.abs;
+
+public class MyHashTableIMPL<K,T> implements HashTable<K,T> {
+
+    private HashTableNode<K, T>[] values;
+
+    private K[] Vector_de_Keys;
+
+    private int amountElements;
+
+    public HashTableNode<K, T>[] getValues() {
+        return values;
+    }
+
+    public K[] getVector_de_Keys() {
+        return Vector_de_Keys;
+    }
 
 
     public MyHashTableIMPL() {
-        miTabla = new HashNode[MyHashTableIMPL.TAMANIO_INIT];
+        values = new HashTableNode[10];
+        amountElements = 0;
     }
 
-    @Override
+    public MyHashTableIMPL(int size) {
+        values = new HashTableNode[size];
+        Vector_de_Keys = (K[]) new Object[size];
+        amountElements = 0;
+    }
+
     public void put(K key, T value) {
-
-        float cargaDelSistema = 0;
-        int cantidaddeEntradas = 0;
-
-        for (int i = 0; i < miTabla.length; i++) {
-            if (miTabla[i] != null) {
-                cantidaddeEntradas = cantidaddeEntradas + 1;
-            }
-        }
-
-        cargaDelSistema = cantidaddeEntradas / miTabla.length;
-
-        if (cargaDelSistema >= 0.8) {
-
-            miTabla = Redimensionar(miTabla);
-            /*HashNode<K, T>[] miTablaNueva = new HashNode[miTabla.length];
-            miTablaNueva = miTabla;
-            miTabla = new HashNode[2 * (miTablaNueva.length)];
-            miTabla = miTablaNueva;*/
-
-        }
-
-        int position = (key.hashCode()) % miTabla.length;
-
-        if (miTabla[position] == null || miTabla[position].isEstaBorrado() || miTabla[position].getLlave().equals(key)) {
-
-            HashNode<K, T> nodoAgregar = new HashNode<>(key, value);
-            miTabla[position] = nodoAgregar;
-
+        int elementBucket = abs(key.hashCode()) % this.values.length;
+        if (this.values[elementBucket] == null || this.values[elementBucket].isDeleated()) {
+            this.values[elementBucket] = new HashTableNode(key, value);
         } else {
-            int numerodeColision = 1;
-            int nuevaposicion = 0;
-
+            int colisionNumber = 1;
             do {
-                nuevaposicion = (key.hashCode() + colision(numerodeColision)) % miTabla.length;
-                numerodeColision++;
-
-            } while (miTabla[nuevaposicion] != null && !miTabla[nuevaposicion].isEstaBorrado() && numerodeColision < miTabla.length);
-
-            if (numerodeColision < miTabla.length) {
-                HashNode<K, T> nodoAgregar = new HashNode<>(key, value);
-                miTabla[nuevaposicion] = nodoAgregar;
-            }
-
+                elementBucket = (abs(key.hashCode()) + colisionNumber) % this.values.length;
+                colisionNumber++;
+            } while (this.values[elementBucket] != null && !this.values[elementBucket].isDeleated() && colisionNumber < this.values.length);
+            this.values[elementBucket] = new HashTableNode(key, value);
         }
-
-
+        Vector_de_Keys[amountElements] = key;
+        this.amountElements++;
+        IncrementSize();
     }
 
-    public static HashNode[] Redimensionar(HashNode[] miTabla) {
-        HashNode[] nuevaTabla = new HashNode[FACTOR_CRECIMIENTO * miTabla.length];
-        System.arraycopy(miTabla, 0, nuevaTabla, 0, miTabla.length);
-
-        return nuevaTabla;
-    }
-
-    public int colision(int intento) {
-
-        if (intento < miTabla.length) {
-            return intento;
-        } else {
-            return 0;
-        }
-    }
-
-    @Override
-    public T get(K key) {
-        int position = key.hashCode();
-        T retorno = null;
-
-        if (miTabla[position] != null && miTabla[position].getLlave() != null && miTabla[position].getLlave().equals(key) && !miTabla[position].isEstaBorrado()) {
-            retorno = miTabla[position].getValor();
-
-        } else {
-            int numerodeColision = 1;
-            int nuevaposicion = 0;
-
-            do {
-                nuevaposicion = key.hashCode() + numerodeColision % miTabla.length;
-                numerodeColision++;
-
-            } while (miTabla[nuevaposicion] != null && !miTabla[nuevaposicion].getLlave().equals(key)
-                    && numerodeColision < miTabla.length);
-
-            if (numerodeColision < miTabla.length && miTabla[position].getLlave() != null && miTabla[nuevaposicion].getLlave().equals(key) &&
-                    !this.miTabla[nuevaposicion].isEstaBorrado()) {
-                retorno = miTabla[nuevaposicion].getValor();
-            }
-
-        }
-
-
-        return retorno;
-    }
-
-    @Override
-    public void remove(K key) {
-        int position = key.hashCode() % miTabla.length;
-
-        if (miTabla[position] == null) {
-            //No hago nada, no hay nada para borrar
-
-        } else if (!miTabla[position].isEstaBorrado() && miTabla[position].getLlave().equals(key)) {
-            miTabla[position].setLlave(null);
-            miTabla[position].setValor(null);
-            miTabla[position].setEstaBorrado(true);
-
-        } else {
-
-            if (!miTabla[position].getLlave().equals(key)) {
-
-                int numerodeColision = 1;
-                int nuevaposicion = 0;
-
-                do {
-                    nuevaposicion = key.hashCode() + numerodeColision % miTabla.length;
-                    numerodeColision++;
-
-                } while (miTabla[nuevaposicion] != null && !miTabla[nuevaposicion].getLlave().equals(key)
-                        && numerodeColision < miTabla.length);
-
-                if (numerodeColision < miTabla.length && miTabla[nuevaposicion].getLlave().equals(key) &&
-                        !this.miTabla[nuevaposicion].isEstaBorrado()) {
-                    miTabla[nuevaposicion].setLlave(null);
-                    miTabla[nuevaposicion].setValor(null);
-                    miTabla[nuevaposicion].setEstaBorrado(true);
-
-
+    private void IncrementSize() {
+        if (((float) this.amountElements / (float) this.values.length) >= 0.8) {
+            HashTableNode<K, T>[] temp = this.values;
+            this.values = new HashTableNode[temp.length * 2];
+            this.amountElements = 0;
+            for (int i = 0; i < temp.length; i++) {
+                if (temp[i] != null && !temp[i].isDeleated()) {
+                    this.put(temp[i].getKey(), temp[i].getValue());
                 }
             }
-
-
         }
-
-
     }
 
-    @Override
-    public int size() {
-        int cantidaddeEntradas = 0;
+    public boolean contains(K key) {
+        boolean contains = false;
+        int elementBucket = abs(key.hashCode()) % this.values.length;
+        if (this.values[elementBucket] != null) {
+            if (this.values[elementBucket].getKey().equals(key) && !this.values[elementBucket].isDeleated()) {
+                contains = true;
+            } else {
+                int colisionNumber = 1;
+                do {
+                    elementBucket = (abs(key.hashCode()) + colisionNumber) % this.values.length;
+                    colisionNumber++;
+                } while ((this.values[elementBucket] == null || !this.values[elementBucket].getKey().equals(key)) && colisionNumber < this.values.length);
 
-        for (int i = 0; i < miTabla.length; i++) {
-            if (miTabla[i] != null) {
-                cantidaddeEntradas = cantidaddeEntradas + 1;
+                if (colisionNumber < this.values.length && !this.values[elementBucket].isDeleated()) {
+                    contains = true;
+                }
             }
         }
-
-        return cantidaddeEntradas;
+        return contains;
     }
+
+    public void remove(K key) throws KeyNotExist {
+        int elementBucket = abs(key.hashCode()) % this.values.length;
+        if (this.get(key) != null) {
+            if (this.values[elementBucket].getKey().equals(key)) {
+                this.values[elementBucket].setDeleated(true);
+            } else {
+                int colisionNumber = 1;
+                do {
+                    elementBucket = (abs(key.hashCode()) + colisionNumber) % this.values.length;
+                    colisionNumber++;
+                } while (!this.values[elementBucket].getKey().equals(key));
+                this.values[elementBucket].setDeleated(true);
+            }
+            this.amountElements--;
+        } else {
+            throw new KeyNotExist();
+        }
+    }
+
+    public T get(K key) {
+        T value = null;
+        int elementBucket = abs(key.hashCode()) % this.values.length;
+        if (this.values[elementBucket] != null) {
+            if (this.values[elementBucket].getKey().equals(key) && !this.values[elementBucket].isDeleated()) {
+                value = this.values[elementBucket].getValue();
+            } else {
+                int colisionNumber = 1;
+                do {
+                    elementBucket = (abs(key.hashCode()) + colisionNumber) % this.values.length;
+                    colisionNumber++;
+                } while (this.values[elementBucket] != null && !this.values[elementBucket].getKey().equals(key) && colisionNumber < this.values.length);
+                if (colisionNumber < this.values.length && this.values[elementBucket] != null && !this.values[elementBucket].isDeleated()) {
+                    value = this.values[elementBucket].getValue();
+                }
+            }
+        }
+        return value;
+    }
+
+    public int size() {
+        return this.amountElements;
+    }
+
 }
+
+
+
+
+
